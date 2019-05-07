@@ -70,23 +70,6 @@ def users_create():
         u = Users(username=username, email=email, pwd=generate_password_hash(password),profile=profile,age=age,address=address, phone_no = phoneNo)
         u.save()
        
-        from sendgrid import SendGridAPIClient
-        from sendgrid.helpers.mail import Mail
-        # send email
-        message = Mail(
-            from_email='from_email@example.com',
-            to_emails='kaizerneos@gmail.com',
-            subject=f'Congratulation {username},You have successfully signed up at Garage Sale',
-            html_content=f'<strong>Please login to use our service')
-        try:
-            sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
-            response = sg.send(message)
-            print(response.status_code)
-            print(response.body)
-            print(response.headers)
-        except Exception as e:
-            print(e.message)
-
         user = Users.get(Users.username == username)
         access_token = create_access_token(identity=user.id)
         return jsonify({
