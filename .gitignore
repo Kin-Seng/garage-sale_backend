@@ -1,0 +1,6 @@
+.vscode
+*.DS_Store
+*__pycache__
+*.env
+garage_sale_web/static/.webassets-cache
+garage_sale_web/static/gen
